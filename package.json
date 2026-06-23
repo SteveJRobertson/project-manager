@@ -1,0 +1,19 @@
+{
+  "name": "project-manager-root",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "build": "npm run build -w backend -w frontend",
+    "lint": "npm run lint -w backend -w frontend",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "test": "npm run test -w backend -w frontend"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
+}
