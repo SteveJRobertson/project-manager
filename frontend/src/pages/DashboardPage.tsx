@@ -17,10 +17,10 @@ interface DashboardPageProps {
 }
 
 const statusColors = {
-  DRAFT: { bg: 'gray.light.2', text: 'gray.light.11', border: 'gray.light.4' },
-  IN_REVIEW: { bg: 'amber.light.2', text: 'amber.light.11', border: 'amber.light.5' },
-  APPROVED: { bg: 'teal.light.2', text: 'teal.light.11', border: 'teal.light.5' },
-  DELIVERED: { bg: 'blue.light.2', text: 'blue.light.11', border: 'blue.light.5' },
+  DRAFT: { bg: 'gray.light.2', text: 'gray.light.12', border: 'gray.light.4' },
+  IN_REVIEW: { bg: 'amber.light.2', text: 'amber.light.12', border: 'amber.light.5' },
+  APPROVED: { bg: 'teal.light.2', text: 'teal.light.12', border: 'teal.light.5' },
+  DELIVERED: { bg: 'blue.light.2', text: 'blue.light.12', border: 'blue.light.5' },
 };
 
 const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
@@ -114,7 +114,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
               },
               _focusVisible: {
                 outline: '2px solid',
-                outlineColor: 'teal.9',
+                outlineColor: 'teal.11',
                 outlineOffset: '2px',
               },
             })}
@@ -247,7 +247,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
                       padding: '0.625rem',
                       borderRadius: 'lg',
                       backgroundColor: 'teal.light.2',
-                      color: 'teal.light.11',
+                      color: 'teal.light.12',
                       fontWeight: 'semibold',
                       fontSize: '0.875rem',
                       border: '1px solid',
@@ -255,13 +255,13 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
                       cursor: 'pointer',
                       transition: 'all 0.2s ease',
                       _hover: {
-                        backgroundColor: 'teal.9',
+                        backgroundColor: 'teal.11',
                         color: 'white',
-                        borderColor: 'teal.9',
+                        borderColor: 'teal.11',
                       },
                       _focusVisible: {
                         outline: '2px solid',
-                        outlineColor: 'teal.9',
+                        outlineColor: 'teal.11',
                         outlineOffset: '2px',
                       },
                     })}

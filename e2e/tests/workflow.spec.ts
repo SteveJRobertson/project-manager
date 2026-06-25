@@ -1,10 +1,25 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { execSync } from 'child_process';
 
 const CONSULTANT = { email: 'consultant@nile.com', password: 'Password123!' };
 const CLIENT = { email: 'client@nile.com', password: 'Password123!' };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function resetDatabase() {
+  try {
+    // Try running it inside Docker Compose first (for CI and standard Docker workflow)
+    execSync('docker compose exec -T backend npm run db:seed -w backend', { stdio: 'ignore' });
+  } catch (error) {
+    try {
+      // Fallback to running it locally on host (in case services are run natively)
+      execSync('npm run db:seed -w backend', { stdio: 'ignore' });
+    } catch (localError) {
+      console.warn('Warning: Failed to reset database status. Test states might be inconsistent.');
+    }
+  }
+}
 
 async function login(page: import('@playwright/test').Page, credentials: typeof CONSULTANT) {
   await page.goto('/');
@@ -21,7 +36,7 @@ async function logout(page: import('@playwright/test').Page) {
 }
 
 async function openProjectDetail(page: import('@playwright/test').Page, projectName: string) {
-  const card = page.locator('div').filter({
+  const card = page.locator('div.bdr_xl').filter({
     has: page.getByRole('heading', { name: projectName }),
   });
   await card.getByRole('button', { name: /view details/i }).click();
@@ -44,6 +59,9 @@ async function scanForA11yViolations(page: import('@playwright/test').Page, cont
 // ─── Tests ────────────────────────────────────────────────────────────────────
 
 test.describe.serial('Nile Project Manager — Full Project Review Workflow', () => {
+  test.beforeAll(async () => {
+    resetDatabase();
+  });
 
   // ── Accessibility: Login Page ──────────────────────────────────────────────
 
