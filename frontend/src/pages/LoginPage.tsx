@@ -46,9 +46,10 @@ const LoginPage: React.FC = () => {
           maxWidth: '420px',
           padding: '2.5rem',
           borderRadius: 'xl',
-          background: 'rgba(255, 255, 255, 0.75)',
+          background: 'rgba(255, 255, 255, 0.85)',
           backdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.5)',
+          border: '1px solid',
+          borderColor: 'border.default',
           boxShadow: '0 8px 32px 0 rgba(0, 77, 92, 0.08)',
           display: 'flex',
           flexDirection: 'column',
@@ -60,14 +61,14 @@ const LoginPage: React.FC = () => {
             className={css({
               fontSize: '2rem',
               fontWeight: 'bold',
-              color: 'teal.800',
+              color: 'teal.text',
               letterSpacing: 'tight',
               marginBottom: '0.5rem',
             })}
           >
             Nile Project Manager
           </h1>
-          <p className={css({ fontSize: '0.875rem', color: 'neutral.600' })}>
+          <p className={css({ fontSize: '0.875rem', color: 'fg.muted' })}>
             Consultant & Client Collaboration Portal
           </p>
         </div>
@@ -78,11 +79,11 @@ const LoginPage: React.FC = () => {
             className={css({
               padding: '0.75rem 1rem',
               borderRadius: 'md',
-              backgroundColor: 'red.50',
-              color: 'red.800',
+              backgroundColor: 'red.light.2',
+              color: 'red.light.11',
               fontSize: '0.875rem',
               border: '1px solid',
-              borderColor: 'red.200',
+              borderColor: 'red.light.5',
             })}
           >
             {error}
@@ -96,7 +97,7 @@ const LoginPage: React.FC = () => {
               className={css({
                 fontSize: '0.875rem',
                 fontWeight: 'medium',
-                color: 'neutral.700',
+                color: 'fg.muted',
               })}
             >
               Email Address
@@ -110,15 +111,15 @@ const LoginPage: React.FC = () => {
                 padding: '0.625rem 0.875rem',
                 borderRadius: 'md',
                 border: '1px solid',
-                borderColor: 'neutral.300',
-                backgroundColor: 'white',
+                borderColor: 'border.default',
+                backgroundColor: 'bg.default',
                 fontSize: '0.95rem',
-                color: 'neutral.900',
+                color: 'fg.default',
                 outline: 'none',
                 transition: 'all 0.2s ease',
                 _focus: {
-                  borderColor: 'teal.500',
-                  boxShadow: '0 0 0 3px rgba(13, 148, 136, 0.15)',
+                  borderColor: 'teal.9',
+                  boxShadow: '0 0 0 3px {colors.teal.light.a3}',
                 },
               })}
               placeholder="you@nile.com"
@@ -132,7 +133,7 @@ const LoginPage: React.FC = () => {
               className={css({
                 fontSize: '0.875rem',
                 fontWeight: 'medium',
-                color: 'neutral.700',
+                color: 'fg.muted',
               })}
             >
               Password
@@ -146,15 +147,15 @@ const LoginPage: React.FC = () => {
                 padding: '0.625rem 0.875rem',
                 borderRadius: 'md',
                 border: '1px solid',
-                borderColor: 'neutral.300',
-                backgroundColor: 'white',
+                borderColor: 'border.default',
+                backgroundColor: 'bg.default',
                 fontSize: '0.95rem',
-                color: 'neutral.900',
+                color: 'fg.default',
                 outline: 'none',
                 transition: 'all 0.2s ease',
                 _focus: {
-                  borderColor: 'teal.500',
-                  boxShadow: '0 0 0 3px rgba(13, 148, 136, 0.15)',
+                  borderColor: 'teal.9',
+                  boxShadow: '0 0 0 3px {colors.teal.light.a3}',
                 },
               })}
               placeholder="••••••••"
@@ -169,7 +170,7 @@ const LoginPage: React.FC = () => {
               marginTop: '0.5rem',
               padding: '0.75rem',
               borderRadius: 'md',
-              backgroundColor: 'teal.600',
+              backgroundColor: 'teal.9',
               color: 'white',
               fontWeight: 'semibold',
               fontSize: '0.95rem',
@@ -177,18 +178,19 @@ const LoginPage: React.FC = () => {
               cursor: 'pointer',
               transition: 'all 0.2s ease',
               _hover: {
-                backgroundColor: 'teal.700',
+                backgroundColor: 'teal.10',
               },
               _active: {
-                backgroundColor: 'teal.800',
+                backgroundColor: 'teal.11',
               },
               _disabled: {
-                backgroundColor: 'neutral.300',
+                backgroundColor: 'bg.disabled',
+                color: 'fg.disabled',
                 cursor: 'not-allowed',
               },
               _focusVisible: {
                 outline: '2px solid',
-                outlineColor: 'teal.500',
+                outlineColor: 'teal.9',
                 outlineOffset: '2px',
               },
             })}

@@ -134,7 +134,7 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
 
   if (loading) {
     return (
-      <div className={css({ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'neutral.500' })}>
+      <div className={css({ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'fg.muted' })}>
         Loading details...
       </div>
     );
@@ -143,8 +143,8 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
   if (error || !project) {
     return (
       <div className={css({ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem' })}>
-        <p className={css({ color: 'red.700', fontWeight: 'semibold' })}>{error || 'Project not found'}</p>
-        <button onClick={onBack} className={css({ padding: '0.5rem 1rem', borderRadius: 'md', border: '1px solid', borderColor: 'neutral.300', cursor: 'pointer' })}>Back to Dashboard</button>
+        <p className={css({ color: 'red.light.11', fontWeight: 'semibold' })}>{error || 'Project not found'}</p>
+        <button onClick={onBack} className={css({ padding: '0.5rem 1rem', borderRadius: 'md', border: '1px solid', borderColor: 'border.default', cursor: 'pointer' })}>Back to Dashboard</button>
       </div>
     );
   }
@@ -155,7 +155,7 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
     <div
       className={css({
         minHeight: '100vh',
-        backgroundColor: 'neutral.50',
+        backgroundColor: 'bg.canvas',
         padding: '2.5rem 2rem',
         fontFamily: 'Inter, system-ui, sans-serif',
       })}
@@ -170,14 +170,14 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
               padding: '0.4rem 0.8rem',
               borderRadius: 'md',
               border: '1px solid',
-              borderColor: 'neutral.300',
-              backgroundColor: 'white',
-              color: 'neutral.700',
+              borderColor: 'border.default',
+              backgroundColor: 'bg.default',
+              color: 'fg.default',
               fontSize: '0.85rem',
               fontWeight: 'medium',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
-              _hover: { backgroundColor: 'neutral.100', color: 'neutral.900' },
+              _hover: { backgroundColor: 'bg.subtle' },
             })}
           >
             ← Back to Dashboard
@@ -185,9 +185,9 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
 
           <div className={css({ display: 'flex', justifyContent: 'space-between', alignItems: 'center' })}>
             <div>
-              <h1 className={css({ fontSize: '2rem', fontWeight: 'bold', color: 'neutral.800' })}>{project.name}</h1>
-              <p className={css({ fontSize: '0.875rem', color: 'neutral.500', marginTop: '0.25rem' })}>
-                Client: <span className={css({ fontWeight: 'semibold', color: 'teal.800' })}>{project.clientName}</span>
+              <h1 className={css({ fontSize: '2rem', fontWeight: 'bold', color: 'fg.default' })}>{project.name}</h1>
+              <p className={css({ fontSize: '0.875rem', color: 'fg.muted', marginTop: '0.25rem' })}>
+                Client: <span className={css({ fontWeight: 'semibold', color: 'teal.text' })}>{project.clientName}</span>
               </p>
             </div>
             <span
@@ -197,10 +197,10 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
                 letterSpacing: 'wide',
                 padding: '0.35rem 0.75rem',
                 borderRadius: 'md',
-                backgroundColor: project.status === 'APPROVED' ? 'teal.50' : project.status === 'IN_REVIEW' ? 'amber.50' : project.status === 'DELIVERED' ? 'blue.50' : 'neutral.100',
-                color: project.status === 'APPROVED' ? 'teal.800' : project.status === 'IN_REVIEW' ? 'amber.800' : project.status === 'DELIVERED' ? 'blue.800' : 'neutral.800',
+                backgroundColor: project.status === 'APPROVED' ? 'teal.light.2' : project.status === 'IN_REVIEW' ? 'amber.light.2' : project.status === 'DELIVERED' ? 'blue.light.2' : 'gray.light.2',
+                color: project.status === 'APPROVED' ? 'teal.light.11' : project.status === 'IN_REVIEW' ? 'amber.light.11' : project.status === 'DELIVERED' ? 'blue.light.11' : 'gray.light.11',
                 border: '1px solid',
-                borderColor: project.status === 'APPROVED' ? 'teal.200' : project.status === 'IN_REVIEW' ? 'amber.200' : project.status === 'DELIVERED' ? 'blue.200' : 'neutral.200',
+                borderColor: project.status === 'APPROVED' ? 'teal.light.5' : project.status === 'IN_REVIEW' ? 'amber.light.5' : project.status === 'DELIVERED' ? 'blue.light.5' : 'gray.light.5',
               })}
             >
               {project.status.replace('_', ' ')}
@@ -209,16 +209,16 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
         </header>
 
         {/* Project Description */}
-        <section className={css({ backgroundColor: 'white', padding: '1.5rem', borderRadius: 'xl', border: '1px solid', borderColor: 'neutral.200' })}>
-          <h2 className={css({ fontSize: '1.1rem', fontWeight: 'bold', color: 'neutral.800', marginBottom: '0.5rem' })}>Project Overview</h2>
-          <p className={css({ fontSize: '0.95rem', color: 'neutral.600', lineHeight: 'relaxed' })}>{project.description}</p>
+        <section className={css({ backgroundColor: 'bg.default', padding: '1.5rem', borderRadius: 'xl', border: '1px solid', borderColor: 'border.default' })}>
+          <h2 className={css({ fontSize: '1.1rem', fontWeight: 'bold', color: 'fg.default', marginBottom: '0.5rem' })}>Project Overview</h2>
+          <p className={css({ fontSize: '0.95rem', color: 'fg.muted', lineHeight: 'relaxed' })}>{project.description}</p>
         </section>
 
         {/* Recommendation Pack (Tabs) */}
         {recPack && (
-          <section className={css({ backgroundColor: 'white', borderRadius: 'xl', border: '1px solid', borderColor: 'neutral.200', overflow: 'hidden' })}>
+          <section className={css({ backgroundColor: 'bg.default', borderRadius: 'xl', border: '1px solid', borderColor: 'border.default', overflow: 'hidden' })}>
             {/* Tabs List */}
-            <div role="tablist" className={css({ display: 'flex', borderBottom: '1px solid', borderColor: 'neutral.200', backgroundColor: 'neutral.50' })}>
+            <div role="tablist" className={css({ display: 'flex', borderBottom: '1px solid', borderColor: 'border.default', backgroundColor: 'bg.subtle' })}>
               {(['summary', 'findings', 'recommendations', 'risks', 'questions'] as const).map((tab) => (
                 <button
                   key={tab}
@@ -230,13 +230,13 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
                     fontSize: '0.875rem',
                     fontWeight: 'semibold',
                     border: 'none',
-                    backgroundColor: activeTab === tab ? 'white' : 'transparent',
-                    color: activeTab === tab ? 'teal.700' : 'neutral.600',
+                    backgroundColor: activeTab === tab ? 'bg.default' : 'transparent',
+                    color: activeTab === tab ? 'teal.text' : 'fg.muted',
                     cursor: 'pointer',
                     borderBottom: activeTab === tab ? '2px solid' : 'none',
-                    borderBottomColor: 'teal.600',
+                    borderBottomColor: 'teal.9',
                     transition: 'all 0.2s ease',
-                    _hover: { color: 'teal.600' },
+                    _hover: { color: 'teal.9' },
                   })}
                 >
                   {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -248,32 +248,32 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
             <div className={css({ padding: '1.5rem', minHeight: '150px' })}>
               {activeTab === 'summary' && (
                 <div role="tabpanel">
-                  <h3 className={css({ fontSize: '1rem', fontWeight: 'bold', color: 'neutral.800', marginBottom: '0.5rem' })}>Executive Summary</h3>
-                  <p className={css({ fontSize: '0.95rem', color: 'neutral.600', lineHeight: 'relaxed', whiteSpace: 'pre-line' })}>{recPack.executiveSummary}</p>
+                  <h3 className={css({ fontSize: '1rem', fontWeight: 'bold', color: 'fg.default', marginBottom: '0.5rem' })}>Executive Summary</h3>
+                  <p className={css({ fontSize: '0.95rem', color: 'fg.muted', lineHeight: 'relaxed', whiteSpace: 'pre-line' })}>{recPack.executiveSummary}</p>
                 </div>
               )}
               {activeTab === 'findings' && (
                 <div role="tabpanel">
-                  <h3 className={css({ fontSize: '1rem', fontWeight: 'bold', color: 'neutral.800', marginBottom: '0.5rem' })}>Key Findings</h3>
-                  <p className={css({ fontSize: '0.95rem', color: 'neutral.600', lineHeight: 'relaxed', whiteSpace: 'pre-line' })}>{recPack.keyFindings}</p>
+                  <h3 className={css({ fontSize: '1rem', fontWeight: 'bold', color: 'fg.default', marginBottom: '0.5rem' })}>Key Findings</h3>
+                  <p className={css({ fontSize: '0.95rem', color: 'fg.muted', lineHeight: 'relaxed', whiteSpace: 'pre-line' })}>{recPack.keyFindings}</p>
                 </div>
               )}
               {activeTab === 'recommendations' && (
                 <div role="tabpanel">
-                  <h3 className={css({ fontSize: '1rem', fontWeight: 'bold', color: 'neutral.800', marginBottom: '0.5rem' })}>Recommendations</h3>
-                  <p className={css({ fontSize: '0.95rem', color: 'neutral.600', lineHeight: 'relaxed', whiteSpace: 'pre-line' })}>{recPack.recommendations}</p>
+                  <h3 className={css({ fontSize: '1rem', fontWeight: 'bold', color: 'fg.default', marginBottom: '0.5rem' })}>Recommendations</h3>
+                  <p className={css({ fontSize: '0.95rem', color: 'fg.muted', lineHeight: 'relaxed', whiteSpace: 'pre-line' })}>{recPack.recommendations}</p>
                 </div>
               )}
               {activeTab === 'risks' && (
                 <div role="tabpanel">
-                  <h3 className={css({ fontSize: '1rem', fontWeight: 'bold', color: 'neutral.800', marginBottom: '0.5rem' })}>Risks & Mitigations</h3>
-                  <p className={css({ fontSize: '0.95rem', color: 'neutral.600', lineHeight: 'relaxed', whiteSpace: 'pre-line' })}>{recPack.risks}</p>
+                  <h3 className={css({ fontSize: '1rem', fontWeight: 'bold', color: 'fg.default', marginBottom: '0.5rem' })}>Risks & Mitigations</h3>
+                  <p className={css({ fontSize: '0.95rem', color: 'fg.muted', lineHeight: 'relaxed', whiteSpace: 'pre-line' })}>{recPack.risks}</p>
                 </div>
               )}
               {activeTab === 'questions' && (
                 <div role="tabpanel">
-                  <h3 className={css({ fontSize: '1rem', fontWeight: 'bold', color: 'neutral.800', marginBottom: '0.5rem' })}>Open Questions</h3>
-                  <p className={css({ fontSize: '0.95rem', color: 'neutral.600', lineHeight: 'relaxed', whiteSpace: 'pre-line' })}>{recPack.openQuestions}</p>
+                  <h3 className={css({ fontSize: '1rem', fontWeight: 'bold', color: 'fg.default', marginBottom: '0.5rem' })}>Open Questions</h3>
+                  <p className={css({ fontSize: '0.95rem', color: 'fg.muted', lineHeight: 'relaxed', whiteSpace: 'pre-line' })}>{recPack.openQuestions}</p>
                 </div>
               )}
             </div>
@@ -282,15 +282,15 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
 
         {/* Notes Card (Consultants Only) */}
         {user?.role === 'CONSULTANT' && project.notes && project.notes.length > 0 && (
-          <section className={css({ backgroundColor: 'white', padding: '1.5rem', borderRadius: 'xl', border: '1px solid', borderColor: 'neutral.200' })}>
-            <h2 className={css({ fontSize: '1.1rem', fontWeight: 'bold', color: 'neutral.800', marginBottom: '1rem' })}>
-              Internal Notes <span className={css({ fontSize: '0.75rem', fontWeight: 'medium', color: 'neutral.500', marginLeft: '0.5rem' })}>(Not visible to Client)</span>
+          <section className={css({ backgroundColor: 'bg.default', padding: '1.5rem', borderRadius: 'xl', border: '1px solid', borderColor: 'border.default' })}>
+            <h2 className={css({ fontSize: '1.1rem', fontWeight: 'bold', color: 'fg.default', marginBottom: '1rem' })}>
+              Internal Notes <span className={css({ fontSize: '0.75rem', fontWeight: 'medium', color: 'fg.subtle', marginLeft: '0.5rem' })}>(Not visible to Client)</span>
             </h2>
             <div className={css({ display: 'flex', flexDirection: 'column', gap: '1rem' })}>
               {project.notes.map((note) => (
-                <div key={note.id} className={css({ padding: '1rem', backgroundColor: 'neutral.50', borderRadius: 'lg', border: '1px solid', borderColor: 'neutral.200' })}>
-                  <h3 className={css({ fontSize: '0.95rem', fontWeight: 'bold', color: 'neutral.800' })}>{note.title}</h3>
-                  <p className={css({ fontSize: '0.875rem', color: 'neutral.600', marginTop: '0.35rem', lineHeight: 'relaxed' })}>{note.content}</p>
+                <div key={note.id} className={css({ padding: '1rem', backgroundColor: 'bg.subtle', borderRadius: 'lg', border: '1px solid', borderColor: 'border.default' })}>
+                  <h3 className={css({ fontSize: '0.95rem', fontWeight: 'bold', color: 'fg.default' })}>{note.title}</h3>
+                  <p className={css({ fontSize: '0.875rem', color: 'fg.muted', marginTop: '0.35rem', lineHeight: 'relaxed' })}>{note.content}</p>
                 </div>
               ))}
             </div>
@@ -302,7 +302,7 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
           {project.status === 'DRAFT' && user?.role === 'CONSULTANT' && (
             <button
               onClick={() => handleTransition('IN_REVIEW')}
-              className={css({ padding: '0.75rem 1.5rem', borderRadius: 'lg', backgroundColor: 'teal.600', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', _hover: { backgroundColor: 'teal.700' } })}
+              className={css({ padding: '0.75rem 1.5rem', borderRadius: 'lg', backgroundColor: 'teal.9', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', _hover: { backgroundColor: 'teal.10' } })}
             >
               Submit for Review
             </button>
@@ -311,7 +311,7 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
           {project.status === 'IN_REVIEW' && user?.role === 'CLIENT' && (
             <button
               onClick={() => handleTransition('APPROVED')}
-              className={css({ padding: '0.75rem 1.5rem', borderRadius: 'lg', backgroundColor: 'teal.600', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', _hover: { backgroundColor: 'teal.700' } })}
+              className={css({ padding: '0.75rem 1.5rem', borderRadius: 'lg', backgroundColor: 'teal.9', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', _hover: { backgroundColor: 'teal.10' } })}
             >
               Approve Project
             </button>
@@ -320,7 +320,7 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
           {project.status === 'IN_REVIEW' && user?.role === 'CONSULTANT' && (
             <button
               onClick={() => handleTransition('DRAFT')}
-              className={css({ padding: '0.75rem 1.5rem', borderRadius: 'lg', backgroundColor: 'amber.600', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', _hover: { backgroundColor: 'amber.700' } })}
+              className={css({ padding: '0.75rem 1.5rem', borderRadius: 'lg', backgroundColor: 'amber.9', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', _hover: { backgroundColor: 'amber.10' } })}
             >
               Revert to Draft
             </button>
@@ -329,7 +329,7 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
           {project.status === 'APPROVED' && user?.role === 'CONSULTANT' && (
             <button
               onClick={() => handleTransition('DELIVERED')}
-              className={css({ padding: '0.75rem 1.5rem', borderRadius: 'lg', backgroundColor: 'teal.600', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', _hover: { backgroundColor: 'teal.700' } })}
+              className={css({ padding: '0.75rem 1.5rem', borderRadius: 'lg', backgroundColor: 'teal.9', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', _hover: { backgroundColor: 'teal.10' } })}
             >
               Mark as Delivered
             </button>
@@ -337,20 +337,20 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
         </section>
 
         {/* Comments Section */}
-        <section className={css({ backgroundColor: 'white', padding: '1.5rem', borderRadius: 'xl', border: '1px solid', borderColor: 'neutral.200', display: 'flex', flexDirection: 'column', gap: '1.5rem' })}>
-          <h2 className={css({ fontSize: '1.1rem', fontWeight: 'bold', color: 'neutral.800' })}>Comments Thread</h2>
+        <section className={css({ backgroundColor: 'bg.default', padding: '1.5rem', borderRadius: 'xl', border: '1px solid', borderColor: 'border.default', display: 'flex', flexDirection: 'column', gap: '1.5rem' })}>
+          <h2 className={css({ fontSize: '1.1rem', fontWeight: 'bold', color: 'fg.default' })}>Comments Thread</h2>
 
           <div className={css({ display: 'flex', flexDirection: 'column', gap: '1rem' })}>
             {project.comments.length === 0 ? (
-              <p className={css({ fontSize: '0.875rem', color: 'neutral.500', fontStyle: 'italic' })}>No comments posted yet.</p>
+              <p className={css({ fontSize: '0.875rem', color: 'fg.muted', fontStyle: 'italic' })}>No comments posted yet.</p>
             ) : (
               project.comments.map((comment) => (
-                <div key={comment.id} className={css({ display: 'flex', flexDirection: 'column', gap: '0.25rem', borderBottom: '1px solid', borderColor: 'neutral.100', paddingBottom: '0.75rem' })}>
+                <div key={comment.id} className={css({ display: 'flex', flexDirection: 'column', gap: '0.25rem', borderBottom: '1px solid', borderColor: 'border.subtle', paddingBottom: '0.75rem' })}>
                   <div className={css({ display: 'flex', gap: '0.5rem', alignItems: 'center' })}>
-                    <span className={css({ fontSize: '0.85rem', fontWeight: 'bold', color: 'neutral.800' })}>{comment.author.name}</span>
-                    <span className={css({ fontSize: '0.7rem', textTransform: 'lowercase', backgroundColor: 'neutral.100', color: 'neutral.600', padding: '0.1rem 0.4rem', borderRadius: 'md' })}>{comment.author.role}</span>
+                    <span className={css({ fontSize: '0.85rem', fontWeight: 'bold', color: 'fg.default' })}>{comment.author.name}</span>
+                    <span className={css({ fontSize: '0.7rem', textTransform: 'lowercase', backgroundColor: 'bg.subtle', color: 'fg.muted', padding: '0.1rem 0.4rem', borderRadius: 'md' })}>{comment.author.role}</span>
                   </div>
-                  <p className={css({ fontSize: '0.9rem', color: 'neutral.700', lineHeight: 'relaxed' })}>{comment.content}</p>
+                  <p className={css({ fontSize: '0.9rem', color: 'fg.default', lineHeight: 'relaxed' })}>{comment.content}</p>
                 </div>
               ))
             )}
@@ -366,11 +366,16 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
                 padding: '0.75rem',
                 borderRadius: 'lg',
                 border: '1px solid',
-                borderColor: 'neutral.300',
+                borderColor: 'border.default',
+                backgroundColor: 'bg.default',
+                color: 'fg.default',
                 outline: 'none',
                 fontSize: '0.9rem',
                 resize: 'vertical',
-                _focus: { borderColor: 'teal.500', boxShadow: '0 0 0 3px rgba(13, 148, 136, 0.1)' },
+                _focus: {
+                  borderColor: 'teal.9',
+                  boxShadow: '0 0 0 3px {colors.teal.light.a3}',
+                },
               })}
             />
             <button
@@ -380,15 +385,15 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
                 alignSelf: 'flex-start',
                 padding: '0.5rem 1.25rem',
                 borderRadius: 'lg',
-                backgroundColor: 'teal.600',
+                backgroundColor: 'teal.9',
                 color: 'white',
                 fontWeight: 'semibold',
                 fontSize: '0.875rem',
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                _hover: { backgroundColor: 'teal.700' },
-                _disabled: { backgroundColor: 'neutral.200', color: 'neutral.400', cursor: 'not-allowed' },
+                _hover: { backgroundColor: 'teal.10' },
+                _disabled: { backgroundColor: 'bg.disabled', color: 'fg.disabled', cursor: 'not-allowed' },
               })}
             >
               Add Comment

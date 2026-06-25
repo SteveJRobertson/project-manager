@@ -17,10 +17,10 @@ interface DashboardPageProps {
 }
 
 const statusColors = {
-  DRAFT: { bg: 'neutral.100', text: 'neutral.800', border: 'neutral.200' },
-  IN_REVIEW: { bg: 'amber.50', text: 'amber.800', border: 'amber.200' },
-  APPROVED: { bg: 'teal.50', text: 'teal.800', border: 'teal.200' },
-  DELIVERED: { bg: 'blue.50', text: 'blue.800', border: 'blue.200' },
+  DRAFT: { bg: 'gray.light.2', text: 'gray.light.11', border: 'gray.light.4' },
+  IN_REVIEW: { bg: 'amber.light.2', text: 'amber.light.11', border: 'amber.light.5' },
+  APPROVED: { bg: 'teal.light.2', text: 'teal.light.11', border: 'teal.light.5' },
+  DELIVERED: { bg: 'blue.light.2', text: 'blue.light.11', border: 'blue.light.5' },
 };
 
 const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
@@ -61,8 +61,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
     <div
       className={css({
         minHeight: '100vh',
-        backgroundColor: 'neutral.50',
-        backgroundImage: 'radial-gradient(circle at 90% 10%, rgba(4, 91, 107, 0.05) 0%, transparent 60%)',
+        backgroundColor: 'bg.canvas',
+        backgroundImage: 'radial-gradient(circle at 90% 10%, {colors.teal.light.a2} 0%, transparent 60%)',
         padding: '2.5rem 2rem',
         fontFamily: 'Inter, system-ui, sans-serif',
       })}
@@ -83,16 +83,16 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             borderBottom: '1px solid',
-            borderColor: 'neutral.200',
+            borderColor: 'border.default',
             paddingBottom: '1.25rem',
           })}
         >
           <div>
-            <h1 className={css({ fontSize: '1.75rem', fontWeight: 'bold', color: 'teal.900' })}>
+            <h1 className={css({ fontSize: '1.75rem', fontWeight: 'bold', color: 'teal.text' })}>
               Projects Dashboard
             </h1>
-            <p className={css({ fontSize: '0.875rem', color: 'neutral.600', marginTop: '0.25rem' })}>
-              Welcome back, <span className={css({ fontWeight: 'semibold', color: 'teal.800' })}>{user?.name}</span> ({user?.role?.toLowerCase()})
+            <p className={css({ fontSize: '0.875rem', color: 'fg.muted', marginTop: '0.25rem' })}>
+              Welcome back, <span className={css({ fontWeight: 'semibold', color: 'teal.text' })}>{user?.name}</span> ({user?.role?.toLowerCase()})
             </p>
           </div>
           <button
@@ -101,21 +101,20 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
               padding: '0.5rem 1rem',
               borderRadius: 'md',
               border: '1px solid',
-              borderColor: 'neutral.300',
-              backgroundColor: 'white',
-              color: 'neutral.700',
+              borderColor: 'border.default',
+              backgroundColor: 'bg.default',
+              color: 'fg.default',
               fontWeight: 'medium',
               fontSize: '0.875rem',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
               _hover: {
-                backgroundColor: 'neutral.50',
-                borderColor: 'neutral.400',
-                color: 'neutral.900',
+                backgroundColor: 'bg.subtle',
+                borderColor: 'border.muted',
               },
               _focusVisible: {
                 outline: '2px solid',
-                outlineColor: 'teal.500',
+                outlineColor: 'teal.9',
                 outlineOffset: '2px',
               },
             })}
@@ -129,11 +128,11 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
             role="alert"
             className={css({
               padding: '1rem',
-              backgroundColor: 'red.50',
-              color: 'red.800',
+              backgroundColor: 'red.light.2',
+              color: 'red.light.11',
               borderRadius: 'md',
               border: '1px solid',
-              borderColor: 'red.200',
+              borderColor: 'red.light.5',
             })}
           >
             {error}
@@ -141,7 +140,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
         )}
 
         {loading ? (
-          <div className={css({ textAlign: 'center', padding: '4rem 0', color: 'neutral.500' })}>
+          <div className={css({ textAlign: 'center', padding: '4rem 0', color: 'fg.muted' })}>
             Loading projects...
           </div>
         ) : displayedProjects.length === 0 ? (
@@ -149,17 +148,17 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
             className={css({
               textAlign: 'center',
               padding: '5rem 2rem',
-              backgroundColor: 'white',
+              backgroundColor: 'bg.default',
               borderRadius: 'lg',
               border: '1px dashed',
-              borderColor: 'neutral.300',
-              color: 'neutral.500',
+              borderColor: 'border.default',
+              color: 'fg.muted',
             })}
           >
-            <p className={css({ fontSize: '1.1rem', fontWeight: 'medium', color: 'neutral.700' })}>
+            <p className={css({ fontSize: '1.1rem', fontWeight: 'medium', color: 'fg.default' })}>
               No projects found
             </p>
-            <p className={css({ fontSize: '0.875rem', color: 'neutral.500', marginTop: '0.5rem' })}>
+            <p className={css({ fontSize: '0.875rem', color: 'fg.muted', marginTop: '0.5rem' })}>
               Active assignments will show up here.
             </p>
           </div>
@@ -177,11 +176,11 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
                 <div
                   key={project.id}
                   className={css({
-                    backgroundColor: 'white',
+                    backgroundColor: 'bg.default',
                     borderRadius: 'xl',
                     border: '1px solid',
-                    borderColor: 'neutral.200',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.02)',
+                    borderColor: 'border.default',
+                    boxShadow: 'sm',
                     padding: '1.5rem',
                     display: 'flex',
                     flexDirection: 'column',
@@ -190,8 +189,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
                     transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                     _hover: {
                       transform: 'translateY(-2px)',
-                      boxShadow: '0 8px 24px rgba(4, 91, 107, 0.06)',
-                      borderColor: 'teal.100',
+                      boxShadow: 'md',
+                      borderColor: 'teal.6',
                     },
                   })}
                 >
@@ -201,7 +200,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
                         className={css({
                           fontSize: '1.15rem',
                           fontWeight: 'bold',
-                          color: 'neutral.800',
+                          color: 'fg.default',
                           lineHeight: 'tight',
                         })}
                       >
@@ -224,14 +223,14 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
                       </span>
                     </div>
 
-                    <p className={css({ fontSize: '0.85rem', fontWeight: 'semibold', color: 'teal.700' })}>
+                    <p className={css({ fontSize: '0.85rem', fontWeight: 'semibold', color: 'teal.text' })}>
                       Client: {project.clientName}
                     </p>
 
                     <p
                       className={css({
                         fontSize: '0.875rem',
-                        color: 'neutral.600',
+                        color: 'fg.muted',
                         lineHeight: 'relaxed',
                         lineClamp: 3,
                         overflow: 'hidden',
@@ -247,22 +246,22 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
                       width: '100%',
                       padding: '0.625rem',
                       borderRadius: 'lg',
-                      backgroundColor: 'teal.50',
-                      color: 'teal.800',
+                      backgroundColor: 'teal.light.2',
+                      color: 'teal.light.11',
                       fontWeight: 'semibold',
                       fontSize: '0.875rem',
                       border: '1px solid',
-                      borderColor: 'teal.100',
+                      borderColor: 'teal.light.4',
                       cursor: 'pointer',
                       transition: 'all 0.2s ease',
                       _hover: {
-                        backgroundColor: 'teal.600',
+                        backgroundColor: 'teal.9',
                         color: 'white',
-                        borderColor: 'teal.600',
+                        borderColor: 'teal.9',
                       },
                       _focusVisible: {
                         outline: '2px solid',
-                        outlineColor: 'teal.500',
+                        outlineColor: 'teal.9',
                         outlineOffset: '2px',
                       },
                     })}
