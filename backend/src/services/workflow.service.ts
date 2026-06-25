@@ -4,6 +4,12 @@ export class WorkflowService {
   /**
    * Enforces server-side workflow transition rules and returns the target status if allowed.
    * Throws an error if the transition is invalid or unauthorized.
+   * 
+   * Supported transitions:
+   *  - DRAFT -> IN_REVIEW (Consultant only)
+   *  - IN_REVIEW -> APPROVED (Client only)
+   *  - IN_REVIEW -> DRAFT (Consultant only - Revert)
+   *  - APPROVED -> DELIVERED (Consultant only)
    */
   static transition(
     currentStatus: ProjectStatus,

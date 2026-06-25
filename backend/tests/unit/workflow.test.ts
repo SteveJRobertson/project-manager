@@ -47,6 +47,21 @@ describe('WorkflowService - State Transitions', () => {
     }).toThrow(/invalid transition/i);
   });
 
+  it('should allow CONSULTANT to transition project from IN_REVIEW to DRAFT (revert)', () => {
+    const result = WorkflowService.transition(
+      ProjectStatus.IN_REVIEW,
+      ProjectStatus.DRAFT,
+      Role.CONSULTANT
+    );
+    expect(result).toBe(ProjectStatus.DRAFT);
+  });
+
+  it('should block CLIENT from transitioning project from IN_REVIEW to DRAFT (revert)', () => {
+    expect(() => {
+      WorkflowService.transition(ProjectStatus.IN_REVIEW, ProjectStatus.DRAFT, Role.CLIENT);
+    }).toThrow(/unauthorized/i);
+  });
+
   it('should block invalid transitions like DRAFT to APPROVED directly', () => {
     expect(() => {
       WorkflowService.transition(ProjectStatus.DRAFT, ProjectStatus.APPROVED, Role.CONSULTANT);

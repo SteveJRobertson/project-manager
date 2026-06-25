@@ -4,6 +4,10 @@ import * as bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('Refusing to run seed script in production');
+  }
+
   // Clear database
   await prisma.comment.deleteMany({});
   await prisma.recommendationPack.deleteMany({});
@@ -15,7 +19,8 @@ async function main() {
   console.log('Seeding database...');
 
   // Create Users
-  const passwordHash = await bcrypt.hash('Password123!', 10);
+  const seedPassword = process.env.SEED_PASSWORD ?? 'Password123!';
+  const passwordHash = await bcrypt.hash(seedPassword, 10);
 
   const consultant = await prisma.user.create({
     data: {

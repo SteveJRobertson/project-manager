@@ -1,7 +1,12 @@
 import jwt from 'jsonwebtoken';
 import { Role } from '@prisma/client';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'nile_super_secret_project_manager_key';
+const JWT_SECRET = (process.env.JWT_SECRET ??
+  (process.env.NODE_ENV === 'test' ? 'test_jwt_secret' : undefined)) as string;
+
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
 const JWT_EXPIRES_IN = '1d';
 
 export interface TokenPayload {
