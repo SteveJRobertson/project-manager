@@ -52,4 +52,23 @@ router.post('/logout', (_req: Request, res: Response) => {
   return res.json({ message: 'Logged out successfully' });
 });
 
+import { authMiddleware } from '../middleware/auth.middleware';
+
+router.get('/me', authMiddleware, async (req: Request, res: Response) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.user?.id },
+      select: { id: true, email: true, name: true, role: true },
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    return res.json(user);
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 export default router;
