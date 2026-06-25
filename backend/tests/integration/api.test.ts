@@ -51,7 +51,14 @@ describe('API Integration Tests', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockProjects);
       expect(prisma.project.findMany).toHaveBeenCalledWith({
-        include: { notes: true, recommendationPack: true, comments: true },
+        include: {
+          notes: true,
+          recommendationPack: true,
+          comments: {
+            include: { author: { select: { id: true, name: true, role: true } } },
+            orderBy: { createdAt: 'asc' },
+          },
+        },
       });
     });
 
@@ -72,7 +79,13 @@ describe('API Integration Tests', () => {
           clientId: 'u2',
           status: { in: [ProjectStatus.IN_REVIEW, ProjectStatus.APPROVED, ProjectStatus.DELIVERED] },
         },
-        include: { recommendationPack: true, comments: true },
+        include: {
+          recommendationPack: true,
+          comments: {
+            include: { author: { select: { id: true, name: true, role: true } } },
+            orderBy: { createdAt: 'asc' },
+          },
+        },
       });
     });
   });
