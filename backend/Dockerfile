@@ -1,5 +1,8 @@
 FROM node:20-alpine
 
+# Install native dependencies required by Prisma engine
+RUN apk add --no-cache openssl libc6-compat
+
 WORKDIR /app
 
 # Copy entire repository codebase first
