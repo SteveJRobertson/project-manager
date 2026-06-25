@@ -4,14 +4,16 @@
   "private": true,
   "workspaces": [
     "backend",
-    "frontend"
+    "frontend",
+    "e2e"
   ],
   "scripts": {
     "build": "npm run build -w backend -w frontend",
     "lint": "npm run lint -w backend -w frontend",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "test": "npm run test -w backend -w frontend"
+    "test": "npm run test -w backend -w frontend",
+    "test:e2e": "npm run test -w e2e"
   },
   "devDependencies": {
     "prettier": "^3.2.5"
