@@ -1,0 +1,108 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  CONSULTANT
+  CLIENT
+}
+
+enum ProjectStatus {
+  DRAFT
+  IN_REVIEW
+  APPROVED
+  DELIVERED
+}
+
+model User {
+  id                String             @id @default(uuid())
+  email             String             @unique
+  passwordHash      String
+  name              String
+  role              Role
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  
+  // Relations
+  clientProjects    Project[]          @relation("ClientProjects")
+  consultantProjects Project[]         @relation("ConsultantProjects")
+  uploadedDocuments Document[]         @relation("UploadedBy")
+  authoredComments  Comment[]          @relation("AuthorComments")
+}
+
+model Project {
+  id                String             @id @default(uuid())
+  name              String
+  clientName        String
+  description       String
+  status            ProjectStatus      @default(DRAFT)
+  clientId          String
+  consultantId      String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  // Relations
+  client            User               @relation("ClientProjects", fields: [clientId], references: [id])
+  consultant        User               @relation("ConsultantProjects", fields: [consultantId], references: [id])
+  
+  notes             Note[]
+  documents         Document[]
+  recommendationPack RecommendationPack?
+  comments          Comment[]
+}
+
+model Note {
+  id          String   @id @default(uuid())
+  projectId   String
+  title       String
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Document {
+  id           String   @id @default(uuid())
+  projectId    String
+  fileName     String
+  filePath     String
+  uploadedById String
+  uploadedAt   DateTime @default(now())
+
+  // Relations
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  uploadedBy   User     @relation("UploadedBy", fields: [uploadedById], references: [id])
+}
+
+model RecommendationPack {
+  id               String   @id @default(uuid())
+  projectId        String   @unique
+  executiveSummary String
+  keyFindings      String
+  recommendations  String
+  risks            String
+  openQuestions    String
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  project          Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  projectId String
+  authorId  String
+  content   String
+  createdAt DateTime @default(now())
+
+  // Relations
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  author    User     @relation("AuthorComments", fields: [authorId], references: [id])
+}
