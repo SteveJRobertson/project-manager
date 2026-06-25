@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { execSync } from 'child_process';
+import path from 'path';
 
 const CONSULTANT = { email: 'consultant@nile.com', password: 'Password123!' };
 const CLIENT = { email: 'client@nile.com', password: 'Password123!' };
@@ -8,13 +9,18 @@ const CLIENT = { email: 'client@nile.com', password: 'Password123!' };
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function resetDatabase() {
+  const repoRoot = path.resolve(__dirname, '../..'); // e2e/tests/workflow.spec.ts -> repo root
   try {
     // Try running it inside Docker Compose first (for CI and standard Docker workflow)
-    execSync('docker compose exec -T backend npm run db:seed -w backend', { stdio: 'ignore' });
+    execSync('docker compose exec -T backend npm run db:seed -w backend', { cwd: repoRoot, stdio: 'ignore' });
   } catch (error) {
+    if (process.env.CI) {
+      // In CI, fail fast if the docker compose exec reset fails
+      throw new Error(`Failed to reset database status in CI: ${error}`);
+    }
     try {
       // Fallback to running it locally on host (in case services are run natively)
-      execSync('npm run db:seed -w backend', { stdio: 'ignore' });
+      execSync('npm run db:seed -w backend', { cwd: repoRoot, stdio: 'ignore' });
     } catch (localError) {
       console.warn('Warning: Failed to reset database status. Test states might be inconsistent.');
     }
@@ -36,7 +42,7 @@ async function logout(page: import('@playwright/test').Page) {
 }
 
 async function openProjectDetail(page: import('@playwright/test').Page, projectName: string) {
-  const card = page.locator('div.bdr_xl').filter({
+  const card = page.locator('article').filter({
     has: page.getByRole('heading', { name: projectName }),
   });
   await card.getByRole('button', { name: /view details/i }).click();
@@ -45,7 +51,7 @@ async function openProjectDetail(page: import('@playwright/test').Page, projectN
 
 async function scanForA11yViolations(page: import('@playwright/test').Page, context: string) {
   const results = await new AxeBuilder({ page })
-    .withTags(['wcag2a', 'wcag2aa'])
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze();
 
   if (results.violations.length > 0) {

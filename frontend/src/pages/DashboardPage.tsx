@@ -173,7 +173,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
             {displayedProjects.map((project) => {
               const colors = statusColors[project.status];
               return (
-                <div
+                <article
                   key={project.id}
                   className={css({
                     backgroundColor: 'bg.default',
@@ -268,7 +268,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
                   >
                     View Details
                   </button>
-                </div>
+                </article>
               );
             })}
           </div>
