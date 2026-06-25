@@ -38,7 +38,7 @@ services:
       postgres:
         condition: service_healthy
     command: >
-      sh -c "npx prisma db push && npm run db:seed -w backend && npm run dev -w backend"
+      sh -c "cd backend && npx prisma db push && npm run db:seed && npm run dev"
 
   frontend:
     build:
