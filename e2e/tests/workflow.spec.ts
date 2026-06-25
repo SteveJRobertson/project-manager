@@ -154,9 +154,10 @@ test.describe.serial('Nile Project Manager — Full Project Review Workflow', ()
     await page.getByRole('button', { name: /add comment/i }).click();
 
     // Comment should appear in the thread
-    await expect(page.getByText(commentText)).toBeVisible();
+    const commentItem = page.locator('div').filter({ has: page.locator('p', { hasText: commentText }) }).last();
+    await expect(commentItem).toBeVisible();
     // Author name should be visible next to comment
-    await expect(page.getByText('Alex Client')).toBeVisible();
+    await expect(commentItem.getByText('Alex Client')).toBeVisible();
   });
 
   test('client approves project — status transitions to APPROVED', async ({ page }) => {

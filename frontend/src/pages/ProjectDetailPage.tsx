@@ -236,7 +236,7 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
                     borderBottom: activeTab === tab ? '2px solid' : 'none',
                     borderBottomColor: 'teal.11',
                     transition: 'all 0.2s ease',
-                    _hover: { color: 'teal.11' },
+                    _hover: { color: 'teal.12' },
                   })}
                 >
                   {tab.charAt(0).toUpperCase() + tab.slice(1)}
