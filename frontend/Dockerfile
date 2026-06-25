@@ -2,22 +2,13 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-COPY backend/package*.json ./backend/
-COPY frontend/package*.json ./frontend/
+# Copy entire repository codebase first
+COPY . .
 
-# Install dependencies (ignoring postinstall script bun build error)
+# Install dependencies (will run workspace prepare scripts)
 RUN npm ci --ignore-scripts
 
-# Copy code
-COPY backend ./backend
-COPY frontend ./frontend
-
 WORKDIR /app/frontend
-
-# Run Panda CSS codegen
-RUN npm run prepare
 
 EXPOSE 5173
 
