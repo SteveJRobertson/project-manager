@@ -53,6 +53,7 @@ services:
       - /app/frontend/node_modules
     environment:
       - VITE_PORT=5173
+      - VITE_BACKEND_URL=http://backend:5001
     depends_on:
       - backend
 
