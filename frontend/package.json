@@ -18,8 +18,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@pandacss/dev": "latest",
-    "@park-ui/panda-preset": "latest",
+    "@pandacss/dev": "1.11.3",
+    "@park-ui/panda-preset": "0.43.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
     "@types/react": "^18.2.66",

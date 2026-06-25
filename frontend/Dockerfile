@@ -5,7 +5,7 @@ WORKDIR /app
 # Copy entire repository codebase first
 COPY . .
 
-# Install dependencies (will run workspace prepare scripts)
+# Install dependencies (--ignore-scripts suppresses lifecycle hooks including prepare)
 RUN npm ci --ignore-scripts
 
 WORKDIR /app/frontend

@@ -231,7 +231,7 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
                     fontWeight: 'semibold',
                     border: 'none',
                     backgroundColor: activeTab === tab ? 'bg.default' : 'transparent',
-                    color: activeTab === tab ? 'teal.text' : 'fg.muted',
+                    color: activeTab === tab ? 'accent.text' : 'fg.muted',
                     cursor: 'pointer',
                     borderBottom: activeTab === tab ? '2px solid' : 'none',
                     borderBottomColor: 'teal.9',
