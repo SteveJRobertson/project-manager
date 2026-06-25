@@ -28,6 +28,7 @@ services:
       JWT_SECRET: "dev_jwt_secret_fallback_12345"
       PORT: 5001
       NODE_ENV: development
+      CORS_ORIGIN: "http://localhost:5173"
     ports:
       - "5001:5001"
     volumes:
@@ -37,6 +38,12 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:5001/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     command: >
       sh -c "cd backend && npx prisma db push && npm run db:seed && npm run dev"
 
@@ -55,7 +62,8 @@ services:
       - VITE_PORT=5173
       - VITE_BACKEND_URL=http://backend:5001
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
 
 volumes:
   postgres_data:

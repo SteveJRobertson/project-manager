@@ -61,7 +61,7 @@ const LoginPage: React.FC = () => {
             className={css({
               fontSize: '2rem',
               fontWeight: 'bold',
-              color: 'teal.text',
+              color: 'accent.text',
               letterSpacing: 'tight',
               marginBottom: '0.5rem',
             })}

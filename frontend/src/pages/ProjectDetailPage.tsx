@@ -187,7 +187,7 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectId, onBack
             <div>
               <h1 className={css({ fontSize: '2rem', fontWeight: 'bold', color: 'fg.default' })}>{project.name}</h1>
               <p className={css({ fontSize: '0.875rem', color: 'fg.muted', marginTop: '0.25rem' })}>
-                Client: <span className={css({ fontWeight: 'semibold', color: 'teal.text' })}>{project.clientName}</span>
+                Client: <span className={css({ fontWeight: 'semibold', color: 'accent.text' })}>{project.clientName}</span>
               </p>
             </div>
             <span

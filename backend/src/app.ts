@@ -9,10 +9,11 @@ import projectRouter from './routes/project.routes';
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173';
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: CORS_ORIGIN,
     credentials: true,
   }),
 );

@@ -88,11 +88,11 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
           })}
         >
           <div>
-            <h1 className={css({ fontSize: '1.75rem', fontWeight: 'bold', color: 'teal.text' })}>
+            <h1 className={css({ fontSize: '1.75rem', fontWeight: 'bold', color: 'accent.text' })}>
               Projects Dashboard
             </h1>
             <p className={css({ fontSize: '0.875rem', color: 'fg.muted', marginTop: '0.25rem' })}>
-              Welcome back, <span className={css({ fontWeight: 'semibold', color: 'teal.text' })}>{user?.name}</span> ({user?.role?.toLowerCase()})
+              Welcome back, <span className={css({ fontWeight: 'semibold', color: 'accent.text' })}>{user?.name}</span> ({user?.role?.toLowerCase()})
             </p>
           </div>
           <button
@@ -223,7 +223,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onSelectProject }) => {
                       </span>
                     </div>
 
-                    <p className={css({ fontSize: '0.85rem', fontWeight: 'semibold', color: 'teal.text' })}>
+                    <p className={css({ fontSize: '0.85rem', fontWeight: 'semibold', color: 'accent.text' })}>
                       Client: {project.clientName}
                     </p>
 
