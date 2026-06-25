@@ -118,7 +118,7 @@ const LoginPage: React.FC = () => {
                 outline: 'none',
                 transition: 'all 0.2s ease',
                 _focus: {
-                  borderColor: 'teal.9',
+                  borderColor: 'teal.11',
                   boxShadow: '0 0 0 3px {colors.teal.light.a3}',
                 },
               })}
@@ -154,7 +154,7 @@ const LoginPage: React.FC = () => {
                 outline: 'none',
                 transition: 'all 0.2s ease',
                 _focus: {
-                  borderColor: 'teal.9',
+                  borderColor: 'teal.11',
                   boxShadow: '0 0 0 3px {colors.teal.light.a3}',
                 },
               })}
@@ -170,7 +170,7 @@ const LoginPage: React.FC = () => {
               marginTop: '0.5rem',
               padding: '0.75rem',
               borderRadius: 'md',
-              backgroundColor: 'teal.9',
+              backgroundColor: 'teal.11',
               color: 'white',
               fontWeight: 'semibold',
               fontSize: '0.95rem',
@@ -178,10 +178,10 @@ const LoginPage: React.FC = () => {
               cursor: 'pointer',
               transition: 'all 0.2s ease',
               _hover: {
-                backgroundColor: 'teal.10',
+                backgroundColor: 'teal.12',
               },
               _active: {
-                backgroundColor: 'teal.11',
+                backgroundColor: 'teal.12',
               },
               _disabled: {
                 backgroundColor: 'bg.disabled',
@@ -190,7 +190,7 @@ const LoginPage: React.FC = () => {
               },
               _focusVisible: {
                 outline: '2px solid',
-                outlineColor: 'teal.9',
+                outlineColor: 'teal.11',
                 outlineOffset: '2px',
               },
             })}
