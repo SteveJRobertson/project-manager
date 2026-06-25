@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: pm-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: project_manager
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: pm-backend
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/project_manager?schema=public"
+      JWT_SECRET: "dev_jwt_secret_fallback_12345"
+      PORT: 5001
+      NODE_ENV: development
+      CORS_ORIGIN: "http://localhost:5173"
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./backend:/app/backend
+      - /app/node_modules
+      - /app/backend/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:5001/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    command: >
+      sh -c "cd backend && npx prisma db push && npm run db:seed && npm run dev"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: pm-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app/frontend
+      - /app/node_modules
+      - /app/frontend/node_modules
+    environment:
+      - VITE_PORT=5173
+      - VITE_BACKEND_URL=http://backend:5001
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

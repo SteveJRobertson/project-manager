@@ -19,7 +19,12 @@ router.get('/', async (req: Request, res: Response) => {
         include: {
           notes: true,
           recommendationPack: true,
-          comments: true,
+          comments: {
+            include: {
+              author: { select: { id: true, name: true, role: true } },
+            },
+            orderBy: { createdAt: 'asc' },
+          },
         },
       });
       return res.json(projects);
@@ -33,7 +38,12 @@ router.get('/', async (req: Request, res: Response) => {
         },
         include: {
           recommendationPack: true,
-          comments: true,
+          comments: {
+            include: {
+              author: { select: { id: true, name: true, role: true } },
+            },
+            orderBy: { createdAt: 'asc' },
+          },
         },
       });
       return res.json(projects);
@@ -54,7 +64,12 @@ router.get('/:id', async (req: Request, res: Response) => {
       include: {
         notes: true,
         recommendationPack: true,
-        comments: true,
+        comments: {
+          include: {
+            author: { select: { id: true, name: true, role: true } },
+          },
+          orderBy: { createdAt: 'asc' },
+        },
       },
     });
 
@@ -165,6 +180,9 @@ router.post('/:id/comments', async (req: Request, res: Response) => {
         projectId: id,
         authorId: user.id,
         content,
+      },
+      include: {
+        author: { select: { id: true, name: true, role: true } },
       },
     });
 
