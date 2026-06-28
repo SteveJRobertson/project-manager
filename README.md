@@ -91,13 +91,7 @@ erDiagram
 * [Node.js](https://nodejs.org/) (v20+)
 * [Docker](https://www.docker.com/) & Docker Compose
 
-### 1. Setup Environment
-Initialize the local configuration in the backend:
-```bash
-cp backend/.env.example backend/.env
-```
-
-### 2. Start Services (Docker Compose)
+### 1. Start Services (Docker Compose)
 Build and spin up the backend API, frontend dev server, and PostgreSQL database:
 ```bash
 docker compose up -d --build
@@ -107,7 +101,7 @@ This will automatically push the schema and seed the database with mock consulta
 * **Frontend Dashboard**: [http://localhost:5173](http://localhost:5173)
 * **Backend API Gateway**: [http://localhost:5001](http://localhost:5001)
 
-### 3. Seed / Reset Database
+### 2. Seed / Reset Database
 To manually wipe and seed the database to the clean initial state (works locally or in CI):
 ```bash
 # Inside active Docker container:
